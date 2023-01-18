@@ -10,6 +10,10 @@ export default function App() {
     setGoals(currentGoals => [...currentGoals, goal])
   }
 
+  function deleteGoalHandler(index) {
+    setGoals(currentGoals => currentGoals.filter(goal => goal.index !== index))
+  }
+
   return (
     <View style={styles.appContainer}>
       <GoalInput onAddGoal={addGoalHandler} />
@@ -17,7 +21,7 @@ export default function App() {
         <FlatList
           data={goals}
           renderItem={(itemData) => {
-            return <GoalItem text={itemData.item} />
+            return <GoalItem goal={itemData} onDeleteGoal={deleteGoalHandler} />
           }}
         />
       </View>
