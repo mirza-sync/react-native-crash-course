@@ -2,6 +2,8 @@ import { useState } from 'react';
 import { FlatList, StyleSheet, View } from 'react-native';
 import GoalInput from './components/GoalIntput';
 import GoalItem from './components/GoalItem';
+import 'react-native-get-random-values'
+import { v4 as uuidv4 } from 'uuid'
 
 export default function App() {
   const [goals, setGoals] = useState([])
@@ -21,7 +23,7 @@ export default function App() {
         <FlatList
           data={goals}
           renderItem={(itemData) => {
-            return <GoalItem goal={itemData} onDeleteGoal={deleteGoalHandler} />
+            return <GoalItem goal={itemData.item} onDeleteGoal={deleteGoalHandler} />
           }}
         />
       </View>
