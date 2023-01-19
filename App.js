@@ -9,11 +9,11 @@ export default function App() {
   const [goals, setGoals] = useState([])
 
   function addGoalHandler(goal) {
-    setGoals(currentGoals => [...currentGoals, goal])
+    setGoals(currentGoals => [...currentGoals, {id: uuidv4(), text: goal}])
   }
 
-  function deleteGoalHandler(index) {
-    setGoals(currentGoals => currentGoals.filter(goal => goal.index !== index))
+  function deleteGoalHandler(id) {
+    setGoals(currentGoals => currentGoals.filter(goal => goal.id !== id))
   }
 
   return (
@@ -25,6 +25,7 @@ export default function App() {
           renderItem={(itemData) => {
             return <GoalItem goal={itemData.item} onDeleteGoal={deleteGoalHandler} />
           }}
+          keyExtractor={itemData => itemData.id}
         />
       </View>
     </View>

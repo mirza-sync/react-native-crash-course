@@ -4,9 +4,9 @@ function GoalItem(props) {
   const { goal } = props
 
   return (
-    <Pressable onPress={props.onDeleteGoal.bind(this, goal.index)}>
+    <Pressable onPress={props.onDeleteGoal.bind(this, goal.id)}>
       <View style={styles.goalItem}>
-        <Text style={styles.goalText}>{goal.item}</Text>
+        <Text style={styles.goalText}>{goal.text}</Text>
       </View>
     </Pressable>
   )
