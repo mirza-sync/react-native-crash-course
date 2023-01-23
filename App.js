@@ -10,7 +10,8 @@ export default function App() {
   const [isModalVisible, setisModalVisible] = useState(false)
 
   function addGoalHandler(goal) {
-    setGoals(currentGoals => [...currentGoals, {id: uuidv4(), text: goal}])
+    setGoals(currentGoals => [...currentGoals, { id: uuidv4(), text: goal }])
+    setisModalVisible(false)
   }
 
   function deleteGoalHandler(id) {
@@ -19,8 +20,18 @@ export default function App() {
 
   return (
     <View style={styles.appContainer}>
-      <Button title='Add New Goal' color='#5e0acc' onPress={() => setisModalVisible(true)} />
-      {isModalVisible && <GoalInput visible={isModalVisible} onAddGoal={addGoalHandler} />}
+      <Button
+        title='Add New Goal'
+        color='#5e0acc'
+        onPress={() => setisModalVisible(true)}
+      />
+      {isModalVisible &&
+        <GoalInput
+          visible={isModalVisible}
+          onAddGoal={addGoalHandler}
+          onCancel={() => setisModalVisible(false)}
+        />
+      }
       <View style={styles.goalsContainer}>
         <FlatList
           data={goals}
