@@ -4,6 +4,7 @@ import GoalInput from './components/GoalIntput';
 import GoalItem from './components/GoalItem';
 import 'react-native-get-random-values'
 import { v4 as uuidv4 } from 'uuid'
+import { StatusBar } from 'expo-status-bar';
 
 export default function App() {
   const [goals, setGoals] = useState([])
@@ -19,29 +20,32 @@ export default function App() {
   }
 
   return (
-    <View style={styles.appContainer}>
-      <Button
-        title='Add New Goal'
-        color='#5e0acc'
-        onPress={() => setisModalVisible(true)}
-      />
-      {isModalVisible &&
-        <GoalInput
-          visible={isModalVisible}
-          onAddGoal={addGoalHandler}
-          onCancel={() => setisModalVisible(false)}
+    <>
+      <StatusBar style='light' />
+      <View style={styles.appContainer}>
+        <Button
+          title='Add New Goal'
+          color='#5e0acc'
+          onPress={() => setisModalVisible(true)}
         />
-      }
-      <View style={styles.goalsContainer}>
-        <FlatList
-          data={goals}
-          renderItem={(itemData) => {
-            return <GoalItem goal={itemData.item} onDeleteGoal={deleteGoalHandler} />
-          }}
-          keyExtractor={itemData => itemData.id}
-        />
+        {isModalVisible &&
+          <GoalInput
+            visible={isModalVisible}
+            onAddGoal={addGoalHandler}
+            onCancel={() => setisModalVisible(false)}
+          />
+        }
+        <View style={styles.goalsContainer}>
+          <FlatList
+            data={goals}
+            renderItem={(itemData) => {
+              return <GoalItem goal={itemData.item} onDeleteGoal={deleteGoalHandler} />
+            }}
+            keyExtractor={itemData => itemData.id}
+          />
+        </View>
       </View>
-    </View>
+    </>
   );
 }
 
